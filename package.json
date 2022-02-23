@@ -1,0 +1,22 @@
+{
+  "name": "ring-google-actions",
+  "version": "1.0.0",
+  "description": "Package to use your Ring Doorbell with your Google Assistant (e.g. Nest Hub)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "setup": "node setup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kronova.net",
+  "license": "MIT",
+  "dependencies": {
+    "actions-on-google": "^3.0.0",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "express-oauth-server": "^2.0.0",
+    "prompts": "^2.4.2",
+    "redis": "^4.0.4",
+    "ring-client-api": "^9.24.0"
+  }
+}
