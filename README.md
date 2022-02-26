@@ -2,7 +2,7 @@
 
 Welcome to Better Ring Integration. This project allows you to fully integrate your Ring Doorbell with Google Home products. This is a work in progress project so feel free to post your feedback, ideas and bugs :).
 
-> :warning: **This is currently work in progess!**: The release is not finished yet and does not work right now! My goal is to have a BETA ready by the end of March.
+> :warning: **This is currently work in progress!**: The release is not finished yet and does not work right now! My goal is to have a BETA ready by the end of March.
 
 # 1. Installation
 
