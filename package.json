@@ -4,6 +4,7 @@
   "description": "Package to use your Ring Doorbell with your Google Assistant (e.g. Nest Hub)",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "setup": "node setup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,5 +19,8 @@
     "prompts": "^2.4.2",
     "redis": "^4.0.4",
     "ring-client-api": "^9.24.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

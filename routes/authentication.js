@@ -3,8 +3,6 @@ const express = require("express");
 const oauthServer = require("../oauth/server");
 const router = express.Router();
 const redisClient = require("../config/config").createRedisClient();
-const Request = require("oauth2-server").Request;
-const Response = require("oauth2-server").Response;
 redisClient.connect();
 
 router.get(

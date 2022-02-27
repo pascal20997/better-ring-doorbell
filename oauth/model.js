@@ -45,13 +45,17 @@ module.exports = {
       .hGetAll(`accessToken:${accessToken}`)
       .then((accessTokenObject) => {
         if (typeof accessTokenObject !== undefined) {
-          return {
-            accessToken: accessTokenObject.accessToken,
-            scope: accessTokenObject.scope || "",
-            accessTokenExpiresAt: new Date(accessTokenObject.expiresAt),
-            client: { id: accessTokenObject.clientId },
-            user: { id: accessTokenObject.userId },
-          };
+          return redisClient
+            .hGetAll(`user:${accessTokenObject.userId}`)
+            .then((userObject) => {
+              return {
+                accessToken: accessTokenObject.accessToken,
+                scope: accessTokenObject.scope || "",
+                accessTokenExpiresAt: new Date(accessTokenObject.expiresAt),
+                client: { id: accessTokenObject.clientId },
+                user: userObject,
+              };
+            });
         } else {
           return false;
         }
