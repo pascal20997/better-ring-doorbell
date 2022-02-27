@@ -1,14 +1,14 @@
-const { request } = require("express");
-const express = require("express");
-const oauthServer = require("../oauth/server");
+const { request } = require('express');
+const express = require('express');
+const oauthServer = require('../oauth/server');
 const router = express.Router();
-const redisClient = require("../config/config").createRedisClient();
+const redisClient = require('../config/config').createRedisClient();
 redisClient.connect();
 
 router.get(
-  "/auth",
+  '/auth',
   (request, response, next) => {
-    redisClient.hGet("user:1", "ringRefreshToken").then((refreshToken) => {
+    redisClient.hGet('user:1', 'ringRefreshToken').then((refreshToken) => {
       if (refreshToken) {
         // multi user currently not implemented!
         response.locals.user = { id: 1 };
@@ -19,10 +19,7 @@ router.get(
     });
   },
   (request, response, next) => {
-    if (
-      typeof request.query.continue !== undefined &&
-      request.query.continue === "true"
-    ) {
+    if (typeof request.query.continue !== undefined && request.query.continue === 'true') {
       next();
     } else {
       response.send(`
@@ -30,6 +27,7 @@ router.get(
     <head>
         <link href="//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <title>Auth API</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
     </head>
     <body>
         <div class="container">
@@ -56,14 +54,14 @@ router.get(
         return response.locals.user;
       },
     },
-  })
+  }),
 );
 router.post(
-  "/token",
+  '/token',
   (request, response, next) => {
     next();
   },
-  oauthServer.token()
+  oauthServer.token(),
 );
 
 module.exports = router;

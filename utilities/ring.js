@@ -16,7 +16,7 @@ RingUtility.prototype.getAllDevices = function () {
         id: camera.id,
         type: 'action.devices.types.DOORBELL',
         traits: [/*'action.devices.traits.CameraStream', */ 'action.devices.traits.ObjectDetection'],
-        name: { name: camera.name },
+        name: { name: camera.description },
         willReportState: true,
         notificationSupportedByAgent: true,
         /*attributes: {

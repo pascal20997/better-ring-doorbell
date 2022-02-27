@@ -7,7 +7,7 @@ const prompts = require('prompts');
   redisClient.connect();
 
   let client = {
-    clientId: require('crypto').randomBytes(64).toString('hex'),
+    id: require('crypto').randomBytes(64).toString('hex'),
     clientSecret: require('crypto').randomBytes(128).toString('hex'),
     grants: ['authorization_code', 'refresh_token'],
     accessTokenLifetime: 3600,
