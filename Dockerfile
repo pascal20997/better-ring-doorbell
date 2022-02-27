@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:12-alpine
 
 LABEL vendor="kronov.net"
 LABEL maintainer="info@kronova.net"

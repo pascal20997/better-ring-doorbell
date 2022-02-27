@@ -1,3 +1,5 @@
+# example docker-compose.yml file
+# "cp .docker-compose.yml docker-compose.yml" to use it
 version: '3'
 services:
   app:
@@ -10,6 +12,11 @@ services:
       - redis-net
     depends_on:
       - redis
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.ring.rule=Host(`kronova.net`)"
+#      - "traefik.http.routers.ring.entrypoints=websecure"
+#      - "traefik.http.routers.ring.tls.certresolver=myresolver"
 
   redis:
     image: redis:6.2-alpine
@@ -19,6 +26,7 @@ services:
       - redis-net
     volumes:
       - redis-data:/data
+      - ./docker_data/redis:/usr/local/etc/redis
 
 networks:
   redis-net:
