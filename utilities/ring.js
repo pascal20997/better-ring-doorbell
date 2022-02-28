@@ -15,13 +15,13 @@ RingUtility.prototype.getAllDevices = function () {
       result.push({
         id: camera.id,
         type: 'action.devices.types.DOORBELL',
-        traits: [/*'action.devices.traits.CameraStream', */ 'action.devices.traits.ObjectDetection'],
+        traits: ['action.devices.traits.CameraStream', 'action.devices.traits.ObjectDetection'],
         name: { name: camera.description },
         willReportState: true,
         notificationSupportedByAgent: true,
-        /*attributes: {
-          cameraStreamSupportedProtocols: ['hls', 'webrtc'],
-        },*/
+        attributes: {
+          cameraStreamSupportedProtocols: [/*'hls',*/ 'webrtc'],
+        },
         deviceInfo: {
           manufacturer: 'Better Ring Integration by kronova.net',
           model: camera.model,

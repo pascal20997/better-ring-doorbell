@@ -1,15 +1,14 @@
-const config = require("../config/config");
+const config = require('../config/config');
 const redisClient = config.createRedisClient();
-const Promise = require("bluebird");
-redisClient.connect();
+const Promise = require('bluebird');
 
 module.exports = {
   getClient: (clientId, clientSecret) => {
     return redisClient.hGetAll(`client:${clientId}`).then((client) => {
       return {
         id: clientId,
-        redirectUris: client.redirectUris.split(","),
-        grants: client.grants.split(","),
+        redirectUris: client.redirectUris.split(','),
+        grants: client.grants.split(','),
         accessTokenLifetime: Number(client.accessTokenLifetime),
       };
     });
@@ -19,13 +18,13 @@ module.exports = {
       redisClient.hSet(`accessToken:${token.accessToken}`, {
         accessToken: token.accessToken,
         expiresAt: token.accessTokenExpiresAt,
-        scope: token.scope || "",
+        scope: token.scope || '',
         clientId: client.id,
         userId: user.id,
       }),
       redisClient.hSet(`refreshToken:${token.refreshToken}`, {
         refreshToken: token.refreshToken,
-        scope: token.scope || "",
+        scope: token.scope || '',
         clientId: client.id,
         userId: user.id,
       }),
@@ -34,7 +33,7 @@ module.exports = {
         accessToken: token.accessToken,
         accessTokenExpiresAt: new Date(token.accessTokenExpiresAt),
         refreshToken: token.refreshToken,
-        scope: token.scope || "",
+        scope: token.scope || '',
         client: { id: client.id },
         user: { id: user.id },
       };
@@ -45,17 +44,15 @@ module.exports = {
       .hGetAll(`accessToken:${accessToken}`)
       .then((accessTokenObject) => {
         if (typeof accessTokenObject !== undefined) {
-          return redisClient
-            .hGetAll(`user:${accessTokenObject.userId}`)
-            .then((userObject) => {
-              return {
-                accessToken: accessTokenObject.accessToken,
-                scope: accessTokenObject.scope || "",
-                accessTokenExpiresAt: new Date(accessTokenObject.expiresAt),
-                client: { id: accessTokenObject.clientId },
-                user: userObject,
-              };
-            });
+          return redisClient.hGetAll(`user:${accessTokenObject.userId}`).then((userObject) => {
+            return {
+              accessToken: accessTokenObject.accessToken,
+              scope: accessTokenObject.scope || '',
+              accessTokenExpiresAt: new Date(accessTokenObject.expiresAt),
+              client: { id: accessTokenObject.clientId },
+              user: userObject,
+            };
+          });
         } else {
           return false;
         }
@@ -65,20 +62,18 @@ module.exports = {
       });
   },
   getRefreshToken: (refreshToken) => {
-    return redisClient
-      .hGetAll(`refreshToken:${refreshToken}`)
-      .then((refreshTokenObject) => {
-        if (typeof refreshTokenObject !== undefined) {
-          return {
-            refreshToken: refreshTokenObject.refreshToken,
-            scope: refreshTokenObject.scope || "",
-            client: { id: refreshTokenObject.clientId },
-            user: { id: refreshTokenObject.userId },
-          };
-        } else {
-          return false;
-        }
-      });
+    return redisClient.hGetAll(`refreshToken:${refreshToken}`).then((refreshTokenObject) => {
+      if (typeof refreshTokenObject !== undefined) {
+        return {
+          refreshToken: refreshTokenObject.refreshToken,
+          scope: refreshTokenObject.scope || '',
+          client: { id: refreshTokenObject.clientId },
+          user: { id: refreshTokenObject.userId },
+        };
+      } else {
+        return false;
+      }
+    });
   },
   revokeToken: (refreshToken) => {
     return redisClient.del(`refreshToken:${refreshToken}`).then(
@@ -87,7 +82,7 @@ module.exports = {
       },
       (reason) => {
         return false;
-      }
+      },
     );
   },
   saveAuthorizationCode: (code, client, user) => {
@@ -110,17 +105,15 @@ module.exports = {
       });
   },
   getAuthorizationCode: (authorizationCode) => {
-    return redisClient
-      .hGetAll(`authCode:${authorizationCode}`)
-      .then((authCode) => {
-        return {
-          code: authCode.authorizationCode,
-          expiresAt: new Date(authCode.expiresAt),
-          redirectUri: authCode.redirectUri,
-          client: { id: authCode.clientId },
-          user: { id: authCode.userId },
-        };
-      });
+    return redisClient.hGetAll(`authCode:${authorizationCode}`).then((authCode) => {
+      return {
+        code: authCode.authorizationCode,
+        expiresAt: new Date(authCode.expiresAt),
+        redirectUri: authCode.redirectUri,
+        client: { id: authCode.clientId },
+        user: { id: authCode.userId },
+      };
+    });
   },
   revokeAuthorizationCode: (authorizationCode) => {
     return redisClient.del(`authCode:${authorizationCode}`).then(
@@ -129,16 +122,14 @@ module.exports = {
       },
       () => {
         return false;
-      }
+      },
     );
   },
   verifyScope: (accessToken, scope) => {
-    return redisClient
-      .hGet(`accessToken:${accessToken}`, "scope")
-      .then((grantedScopes) => {
-        const requestedScopes = scope.split(" ");
-        const authorizedScopes = grantedScopes.split(" ");
-        return requestedScopes.every((s) => authorizedScopes.indexOf(s) >= 0);
-      });
+    return redisClient.hGet(`accessToken:${accessToken}`, 'scope').then((grantedScopes) => {
+      const requestedScopes = scope.split(' ');
+      const authorizedScopes = grantedScopes.split(' ');
+      return requestedScopes.every((s) => authorizedScopes.indexOf(s) >= 0);
+    });
   },
 };

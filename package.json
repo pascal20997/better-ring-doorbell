@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js",
-    "setup": "node setup.js",
+    "start": "node index.js --unhandled-rejections=strict",
+    "setup": "node setup.js --unhandled-rejections=strict",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kronova.net",

@@ -4,8 +4,6 @@ const redisClient = require('./config/config').createRedisClient();
 const prompts = require('prompts');
 
 (async () => {
-  redisClient.connect();
-
   let client = {
     id: require('crypto').randomBytes(64).toString('hex'),
     clientSecret: require('crypto').randomBytes(128).toString('hex'),
