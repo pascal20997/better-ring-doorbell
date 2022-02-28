@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { RingApi } = require('ring-client-api');
 const { generateUuid } = require('ring-client-api/lib/api/util');
 
 let sessionUuid;

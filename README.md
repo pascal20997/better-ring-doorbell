@@ -10,7 +10,7 @@ Clone the repository. Then run
 
 `npm i`
 
-# 2. onfiguration
+# 2. Configuration
 
 Take a look into `config/config.js`. This is the default configuration. You can override the default configuration using environment variables.
 
@@ -23,3 +23,9 @@ Take a look into `config/config.js`. This is the default configuration. You can 
 # 3. Setup
 
 Currently the setup process is a CLI step. Call `npm run setup` or `node setup.js` to start and follow the instructions. I'll add a Web UI Setup later.
+
+# F.A.Q
+
+## Error: Refresh token is not valid. Unable to authenticate with Ring servers.
+
+In this case the refresh token has expired. The server tries to update the token automatically but in case of this message you have to use `npm run refresh-token` to update the refresh token.

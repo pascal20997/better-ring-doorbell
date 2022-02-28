@@ -1,6 +1,6 @@
 // setup process that creates a client id and client secret for your Google Actions project
 
-const redisClient = require('./config/config').createRedisClient();
+const redisClient = require('./config/config').getRedisClient();
 const prompts = require('prompts');
 
 (async () => {

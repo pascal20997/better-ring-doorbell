@@ -2,14 +2,11 @@ const express = require('express');
 const app = express();
 const oauthServer = require('./oauth/server.js');
 const bodyParser = require('body-parser');
-
 const site = require('./routes/site');
-const googleActions = require('./routes/google-actions');
-const authentication = require('./routes/authentication');
+const ringListener = require('./listener/ring');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', site.index);
@@ -34,3 +31,5 @@ app.use((err, req, res, next) => {
 app.listen(8000, function () {
   console.log('Listening to Port 8000');
 });
+
+ringListener.initialize();

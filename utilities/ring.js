@@ -1,11 +1,5 @@
-const { RingApi } = require('ring-client-api');
-
 function RingUtility(user) {
-  this.ringApi = new RingApi({
-    refreshToken: user.ringRefreshToken,
-    cameraStatusPollingSeconds: 20,
-    cameraDingsPollingSeconds: 1,
-  });
+  this.ringApi = require('../config/config').getRingApiForUser(user);
 }
 
 RingUtility.prototype.getAllDevices = function () {

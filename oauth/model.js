@@ -1,5 +1,5 @@
 const config = require('../config/config');
-const redisClient = config.createRedisClient();
+const redisClient = config.getRedisClient();
 const Promise = require('bluebird');
 
 module.exports = {
