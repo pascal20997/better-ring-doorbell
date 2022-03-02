@@ -1,3 +1,4 @@
+const config = require('../config/config');
 const express = require('express');
 const router = express.Router();
 const { generateUuid } = require('ring-client-api/lib/api/util');
@@ -11,11 +12,7 @@ let sessionUuid;
  */
 
 router.post('/answer', (request, response, next) => {
-  const ringApi = new RingApi({
-    refreshToken: response.locals.oauth.token.user.ringRefreshToken,
-    cameraStatusPollingSeconds: 20,
-    cameraDingsPollingSeconds: 1,
-  });
+  const ringApi = config.getRingApiForUser(response.locals.oauth.token.user);
   ringApi.getCameras().then((cameras) => {
     const camera = cameras.find((c) => c.id === Number(request.body.deviceId));
     switch (request.body.action) {
