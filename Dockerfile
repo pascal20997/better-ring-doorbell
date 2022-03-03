@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-LABEL vendor="kronov.net"
+LABEL vendor="kronova.net"
 LABEL maintainer="info@kronova.net"
 
 ENV NODE_ENV=production
