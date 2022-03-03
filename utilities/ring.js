@@ -68,6 +68,7 @@ RingUtility.prototype._commandGetCameraStream = function (command, request) {
           states: {
             online: true,
             cameraStreamSignalingUrl: `https://${request.headers.host}/stream/answer`,
+            cameraStreamProtocol: 'webrtc',
           },
         },
       ],

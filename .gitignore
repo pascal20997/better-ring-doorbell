@@ -1,2 +1,3 @@
 node_modules
 docker-compose.yml
+config/google-secret-key.json
