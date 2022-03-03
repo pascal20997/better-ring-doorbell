@@ -22,7 +22,7 @@ app.onQuery((body, headers) => {
     return {
       requestId: body.requestId,
       payload: {
-        agentUserId: 'user1',
+        agentUserId: '1',
         devices: devicePayload,
       },
     };

@@ -18,7 +18,7 @@ const sendNotification = (deviceId) => {
   const res = homegraphClient.devices
     .reportStateAndNotification({
       requestBody: {
-        agentUserId: 'user1',
+        agentUserId: '1',
         eventId: 'doorbell_press',
         requestId: 'doorbell_press',
         payload: {
@@ -26,6 +26,9 @@ const sendNotification = (deviceId) => {
             notifications: {
               [deviceId]: {
                 ObjectDetection: {
+                  objects: {
+                    unclassified: 1,
+                  },
                   priority: 0,
                   detectionTimestamp: timestamp,
                 },
