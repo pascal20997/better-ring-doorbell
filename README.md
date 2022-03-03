@@ -10,19 +10,22 @@ Clone the repository. Then run
 
 `npm i`
 
-# 2. Configuration
+# 3. Setup
 
-Take a look into `config/config.js`. This is the default configuration. You can override the default configuration using environment variables.
+Currently the setup process is a CLI step. Call `npm run setup` or `node setup.js` to start and follow the instructions. I'll add a Web UI Setup later.
+
+## Additonal required steps
+
+- Copy .env.example to .env and adjust the redis host and port if you need.
+- I will add the detailed steps later. Use [this tutorial](https://developers.google.com/assistant/smarthome/develop/notifications#notification-requests) for now to enable Homegraph API and get your credentials json file and copy it to config/google-secret-key.json (see Options below!).
 
 ## Options
 
 | Variable   | Description        | Default |
 | ---------- | ------------------ | ------- |
-| REDIS_HOST | The redis hostname | redis   |
-
-# 3. Setup
-
-Currently the setup process is a CLI step. Call `npm run setup` or `node setup.js` to start and follow the instructions. I'll add a Web UI Setup later.
+| REDIS_HOST | The redis hostname                               | redis   |
+| REDIS_PORT | The redis port                                   | 6379    |
+| GOOGLE_APPLICATION_CREDENTIALS | Credentials JSON from Google | /app/config/google-secret-key.json |
 
 # F.A.Q
 
