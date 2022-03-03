@@ -1,5 +1,6 @@
 const config = require('../config/config');
 const express = require('express');
+const cors = require('cors');
 const router = express.Router();
 const { generateUuid } = require('ring-client-api/lib/api/util');
 
@@ -11,18 +12,14 @@ let sessionUuid;
  * Testing around to get two way communication between Doorbell and Google Nest Hub
  */
 
-router.use((request, response, next) => {
-  if (request.method === 'OPTIONS') {
-    response
-      .setHeader('Access-Control-Request-Method', 'POST')
-      .setHeader('Access-Control-Allow-Origin', 'https://www.gstatic.com');
-    response.json({});
-  }
-  next();
-});
+const corsOptions = {
+  origin: 'https://www.gstatic.com',
+  optionsSuccessStatus: 200,
+};
 
-router.post('/answer', (request, response, next) => {
-  response.setHeader('Access-Control-Allow-Origin', 'https://www.gstatic.com');
+router.options('/answer', cors(corsOptions));
+
+router.post('/answer', cors(corsOptions), (request, response) => {
   const ringApi = config.getRingApiForUser(response.locals.oauth.token.user);
   ringApi.getCameras().then((cameras) => {
     const camera = cameras.find((c) => c.id === Number(request.body.deviceId));
