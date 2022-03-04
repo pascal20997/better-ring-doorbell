@@ -1,6 +1,7 @@
 const config = require('../config/config');
 const express = require('express');
 const cors = require('cors');
+const oauthServer = require('../oauth/server.js');
 const router = express.Router();
 const { generateUuid } = require('ring-client-api/lib/api/util');
 
