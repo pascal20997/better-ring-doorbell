@@ -19,7 +19,7 @@ const sendNotification = (deviceId) => {
     .reportStateAndNotification({
       requestBody: {
         agentUserId: '1',
-        eventId: 'doorbell_press',
+        eventId: `doorbell_press_${timestamp}`,
         requestId: 'doorbell_press',
         payload: {
           devices: {
