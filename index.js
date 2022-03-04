@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', site.index);
 app.use('/oauth', require('./routes/authentication'));
 app.use('/google-actions', oauthServer.authenticate(), require('./routes/google-actions'));
-app.use('/stream', oauthServer.authenticate(), require('./routes/stream'));
+app.use('/stream', require('./routes/stream'));
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
