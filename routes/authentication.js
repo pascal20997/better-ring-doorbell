@@ -55,12 +55,14 @@ router.get(
     },
   }),
 );
+
 router.post(
   '/token',
-  (request, response, next) => {
-    next();
-  },
-  oauthServer.token(),
+  oauthServer.token({
+    // Google recommendation see https://developers.google.com/assistant/identity/oauth2 to prevent
+    // user to re-authenticate every time the token expires
+    accessTokenLifetime: 315360000,
+  }),
 );
 
 module.exports = router;

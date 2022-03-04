@@ -24,9 +24,6 @@ router.post('/answer', cors(corsOptions), (request, response) => {
   ringApi.getCameras().then((cameras) => {
     const camera = cameras.find((c) => c.id === Number(request.body.deviceId));
     switch (request.body.action) {
-      case 'answer':
-        response.send('Not implemented yet!');
-        break;
       case 'offer':
         this.sessionUuid = generateUuid();
         console.log(`Session with uuid "${this.sessionUuid}" started...`);

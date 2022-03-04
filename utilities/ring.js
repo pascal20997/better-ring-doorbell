@@ -14,7 +14,8 @@ RingUtility.prototype.getAllDevices = function () {
         willReportState: true,
         notificationSupportedByAgent: true,
         attributes: {
-          cameraStreamSupportedProtocols: [/*'hls',*/ 'webrtc'],
+          cameraStreamSupportedProtocols: ['webrtc'],
+          cameraStreamNeedAuthToken: true,
         },
         deviceInfo: {
           manufacturer: 'Better Ring Integration by kronova.net',
