@@ -5,7 +5,7 @@ const prompts = require('prompts');
 
 (async () => {
   let client = {
-    id: require('crypto').randomBytes(64).toString('hex'),
+    id: 'ring-doorbell',
     clientSecret: require('crypto').randomBytes(128).toString('hex'),
     grants: ['authorization_code', 'refresh_token'],
     accessTokenLifetime: 3600,

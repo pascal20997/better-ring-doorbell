@@ -12,5 +12,6 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
 
 COPY . .
+COPY .env.example .env
 
 CMD [ "node", "index.js" ]
